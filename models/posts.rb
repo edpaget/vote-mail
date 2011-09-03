@@ -3,11 +3,11 @@ class Post < YAML_map
   fields :upvotes, :downvotes, :poster 
   
   def up!
-    upvotes = if upvotes.nil? then 1 else upvotes + 1 end
+    self.upvotes = if self.upvotes.nil? then 1 else self.upvotes + 1 end
   end
 
   def down!
-    downvotes = if downvotes.nil? then 1 else upvotes + 1 end
+    self.downvotes = if self.downvotes.nil? then 1 else self.downvotes + 1 end
   end
 end
   

@@ -9,7 +9,7 @@ module Processor
   def post(hash)
     begin
       loaded_post = Post.load(hash[:post])
-      loaded_post.up
+      loaded_post.up!
       loaded_post.save!
     rescue Errno::ENOENT
       new_post = Post.new(:post => hash[:post],
@@ -21,8 +21,9 @@ module Processor
   def upvote(post_name)
     begin
       loaded_post = Post.load(post_name)
-      loaded_post.up
+      loaded_post.up!
       loaded_post.save!
+      loaded_post.upvotes
     rescue Errno::ENOENT
       raise PostNotFound, "The requested Post could not be found."
     end
@@ -31,8 +32,9 @@ module Processor
   def downvote(post_name)
     begin
       loaded_post = Post.load(post_name)
-      loaded_post.down
+      loaded_post.down!
       loaded_post.save!
+      loaded_post.downvotes
     rescue Errno::ENOENT
       raise PostNotFound, "The requested Post could not be found."
     end
