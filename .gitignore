@@ -1,0 +1,10 @@
+# Temp Files #
+*.swp
+
+# OS Files #
+.DS_Store?
+
+# Directories #
+path/*
+TestClass/*
+Post/*

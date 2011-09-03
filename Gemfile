@@ -1,0 +1,3 @@
+sourche :rubygems
+gem 'mail'
+
