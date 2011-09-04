@@ -15,16 +15,6 @@ class PostTest < Test::Unit::TestCase
     assert @test_instance
   end
 
-  def test_save_instance
-    assert @test_instance.save!
-  end
-
-  def test_load_instance
-    @test_instance.save!
-    test_load_instance = Post.load(@test_instance.post)
-    assert_equal test_load_instance.post, "http://www.google.com"
-  end
-
   def test_upvote
     @test_instance.up!
     puts @test_instance.upvotes
