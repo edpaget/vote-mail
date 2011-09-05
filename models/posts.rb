@@ -1,6 +1,6 @@
 class Post < YAML_map
   key :post
-  fields :upvotes, :downvotes, :poster 
+  fields :upvotes, :downvotes, :poster, :url, :self
   
   def up!
     self.upvotes = if self.upvotes.nil? then 1 else self.upvotes + 1 end

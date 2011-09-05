@@ -1,3 +1,3 @@
-sourche :rubygems
+source :rubygems
 gem 'mail'
 

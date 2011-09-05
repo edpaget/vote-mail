@@ -12,8 +12,7 @@ module Processor
       loaded_post.up!
       loaded_post.save!
     rescue YAML_map::FileNotFound
-      new_post = Post.new(:post => hash[:post],
-                          :poster => hash[:sender])
+      new_post = Post.new(hash)
       new_post.save!
     end    
   end
