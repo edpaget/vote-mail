@@ -2,6 +2,10 @@ require 'yaml'
 require 'digest/md5'
 
 class YAML_map
+
+  class FileNotFound < StandardError
+  end
+
   def initialize(hash)
     hash.each do |key, val|
       self.send("#{key}=".intern, val)
@@ -22,13 +26,21 @@ class YAML_map
   end
 
   def save!
-    path = "#{self.class.name}/#{Digest::MD5.hexdigest(self.send(key))}.yml"
-    File.open(path, 'w'){ |file| file.write self.to_yaml }
+    begin
+      path = "#{self.class.name}/#{Digest::MD5.hexdigest(self.send(key))}.yml"
+      File.open(path, 'w'){ |file| file.write self.to_yaml }
+    rescue Errno::ENOENT
+      raise FileNotFound, "The File could not be saved."
+    end
   end
 
   def self.load(name)
-    path = "#{self.to_s}/#{Digest::MD5.hexdigest(name)}.yml"
-    return YAML::load(File.open(path))
+    begin 
+      path = "#{self.to_s}/#{Digest::MD5.hexdigest(name)}.yml"
+      return YAML::load(File.open(path))
+    rescue Errno::ENOENT
+      raise FileNotFound, "The resquested file could not be found"
+    end
   end
 
 end

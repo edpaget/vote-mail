@@ -11,7 +11,7 @@ module Processor
       loaded_post = Post.load(hash[:post])
       loaded_post.up!
       loaded_post.save!
-    rescue Errno::ENOENT
+    rescue YAML_map::FileNotFound
       new_post = Post.new(:post => hash[:post],
                           :poster => hash[:sender])
       new_post.save!
@@ -24,7 +24,7 @@ module Processor
       loaded_post.up!
       loaded_post.save!
       loaded_post.upvotes
-    rescue Errno::ENOENT
+    rescue YAML_map::FileNotFound
       raise PostNotFound, "The requested Post could not be found."
     end
   end
@@ -35,7 +35,7 @@ module Processor
       loaded_post.down!
       loaded_post.save!
       loaded_post.downvotes
-    rescue Errno::ENOENT
+    rescue YAML_map::FileNotFound
       raise PostNotFound, "The requested Post could not be found."
     end
   end
