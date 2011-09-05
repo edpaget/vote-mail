@@ -6,7 +6,7 @@ class ProcessorTest < Test::Unit::TestCase
 
   def setup
     @arg_hash = {:post => "http://www.google.com",
-                :sender => "sender@example.com"}
+                :poster => "sender@example.com"}
   end
 
   def teardown

@@ -6,12 +6,16 @@ module MailParse
   class MailCommand
     def initialize(email)
       @poster = email.sender.first
-      @post = MailParse.parse_body
+      MailParse.read_body(email.body.decoded).each do |field|
+      end
+    end
+  end
   def build(email)
   end
 
-  def parse_body
-
+  def read_body(email_body)
+    split_body = email_body.split(/\s|"([^"]*)"/)
+  end
   
 end
   
